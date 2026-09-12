@@ -153,13 +153,13 @@ def solve_tov(Pc, EoS, r0=1e-6, rb=np.inf):
     """
 
     def tov_eqs(r, y):
-        m, P = y
+        m, P, Phi = y
 
         rho = EoS(P)
         dm_dr = 4*np.pi*r**2 * rho
         dP_dr = -(rho + P)*((m+4*np.pi*r**3 * P)/(r*(r-2*m)))
-
-        return [dm_dr, dP_dr]
+        dPhi_dr = -dP_dr/(rho+P)
+        return [dm_dr, dP_dr, dPhi_dr]
 
     def surface_event(r, y):
         # Trigger just above P=0 (1e-11) to avoid stalling the integrator
@@ -173,8 +173,8 @@ def solve_tov(Pc, EoS, r0=1e-6, rb=np.inf):
     # assuming near-constant density rho_c inside the small core [0, r0].
     m_start = (4/3)*np.pi*r0**3 * rho_c
     P_start = Pc
-
-    y0 = [m_start, P_start]
+    Phi_start = 0.0 #By hand
+    y0 = [m_start, P_start, Phi_start]
 
     solution = solve_ivp(
         fun=tov_eqs,
@@ -189,9 +189,12 @@ def solve_tov(Pc, EoS, r0=1e-6, rb=np.inf):
     if solution.t_events[0].size > 0:
         R = solution.t_events[0][0]
         M = solution.y_events[0][0][0]
+        Phi_surf = solution.y_events[0][0][2]
+        Phi_true = (1/2)*np.log(1 - (2*M/R))
+        Phi_offset = Phi_true - Phi_surf
     else:
         R = np.inf
         M = np.inf
-
-    return R, M, solution
+        Phi_offset = 0.0
+    return R, M, Phi_offset, solution
 
