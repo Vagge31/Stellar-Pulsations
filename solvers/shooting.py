@@ -260,3 +260,9 @@ def rayleigh_quotient(x, y1, y2, P_func, Q_func, W_func):
     W = W_func(x)
 
     return (simpson(y=P*y2**2 + Q*y1**2, x=x))/(simpson(y=W*y1**2, x=x))
+
+
+    #GENERAL RELATIVISTIC CASE
+    #DEFINE THE PULSATION SYSTEM USING THE FORM FROM MTW 
+
+    
