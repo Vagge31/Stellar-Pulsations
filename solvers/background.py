@@ -99,7 +99,7 @@ def real_eos(t):
 
     Reproduces the classic Oppenheimer-Volkoff free-neutron-gas EOS given in
     parametric form via an auxiliary variable t (related to the neutron
-    Fermi momentum), rather than as a closed-form rho(P):
+    Fermi momentum), rather than as a closed-form rho(P):git s
         rho(t) = K * (sinh(t) - t)
         P(t)   = (K/3) * (sinh(t) - 8*sinh(t/2) + 3*t)
     with K=4.251e-4 in geometrized units. Used together with interp1d (see
