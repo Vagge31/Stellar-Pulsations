@@ -164,7 +164,7 @@ def solve_tov(Pc, EoS, r0=1e-6, rb=np.inf):
     def surface_event(r, y):
         # Trigger just above P=0 (1e-11) to avoid stalling the integrator
         # as dP/dr steepens near the true surface.
-        return y[1]-1e-11
+        return y[1]-(Pc*1e-8)
     surface_event.terminal = True
     surface_event.direction = -1
 
@@ -184,7 +184,7 @@ def solve_tov(Pc, EoS, r0=1e-6, rb=np.inf):
         events=surface_event,
         dense_output=True,
         rtol=1e-9,
-        atol=1e-12
+        atol=Pc*1e-10
     )
     if solution.t_events[0].size > 0:
         R = solution.t_events[0][0]
