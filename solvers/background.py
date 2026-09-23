@@ -177,7 +177,7 @@ def solve_tov(Pc, EoS, r0=1e-6, rb=np.inf):
     # Regular (non-singular) expansion of the enclosed mass near r=0,
     # assuming near-constant density rho_c inside the small core [0, r0].
     m_start = (4/3)*np.pi*r0**3 * rho_c
-    P_start = Pc
+    P_start = Pc 
     Phi_start = 0.0 #By hand
     y0 = [m_start, P_start, Phi_start]
 

@@ -6,7 +6,7 @@ from scipy.interpolate import interp1d
 import numpy as np
 
 
-def solve_system(r,P,W,Q, omega2):
+def solve_system(r,P,W,Q, omega2): 
     #P = interp1d(r,P_fun,"linear",fill_value="extrapolate") 
     #W = interp1d(r,W_fun,"linear",fill_value="extrapolate")
     #Q = interp1d(r,Q_fun,"linear",fill_value="extrapolate")

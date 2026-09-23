@@ -256,7 +256,7 @@ def rayleigh_quotient(x, y1, y2, P_func, Q_func, W_func):
     """
 
     P = P_func(x)
-    Q = Q_func(x)
+    Q = Q_func(x) 
     W = W_func(x)
 
     return (simpson(y=P*y2**2 - Q*y1**2, x=x))/(simpson(y=W*y1**2, x=x))
