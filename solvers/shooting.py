@@ -130,7 +130,7 @@ def solve_system(omega2_hat, l, bg_rho, bg_g, bg_c2, bg_N2):
 
     if l == 0:
         # Vanishing Lagrangian pressure perturbation at the free surface.
-        residual = (4+omega2_hat/g_surf)*(y1_surf/gamma)
+        residual = y2_surf-(4+omega2_hat/g_surf)*(y1_surf/gamma)
 
     else:
         # Vanishing Eulerian pressure perturbation at the free surface.
@@ -216,7 +216,7 @@ def get_eigenfunction(omega2_hat, l, bg_rho, bg_g, bg_c2, bg_N2):
 
     y0 = [y1_start, y2_start]
 
-    xend = 0.99
+    xend = 0.999
 
     sol = solve_ivp(
         pulsation_system,
@@ -259,4 +259,4 @@ def rayleigh_quotient(x, y1, y2, P_func, Q_func, W_func):
     Q = Q_func(x)
     W = W_func(x)
 
-    return (simpson(y=P*y2**2 + Q*y1**2, x=x))/(simpson(y=W*y1**2, x=x))
+    return (simpson(y=P*y2**2 - Q*y1**2, x=x))/(simpson(y=W*y1**2, x=x))

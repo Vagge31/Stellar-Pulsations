@@ -94,6 +94,11 @@ def eos(P):
     G = 2
     return (P/K)**(1/G) + P/(G-1)
 
+def eos_kokkotas(P):
+        K = 100
+        G = 2
+        return (P/K)**(1/G)
+
 def real_eos(t):
     """Parametric realistic (degenerate free-neutron gas) equation of state.
 
